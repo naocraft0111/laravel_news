@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    /**
+     * 投稿リスト
+     *
+     * @param int $id ユーザーID
+     * @return Response src/resources/views/user/list/index.blade.php
+     */
+    public function index(int $id)
+    {
+        return view('user.list.index');
+    }
+}

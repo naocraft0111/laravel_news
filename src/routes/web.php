@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TopController;
+use App\Http\Controllers\User\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +24,7 @@ require __DIR__.'/auth.php';
 // 総合トップ
 Route::get('/', [TopController::class, 'top'])
     ->name('top');
+
+// マイページ
+Route::get('/user/{id}/index', [PostController::class, 'index'])
+    ->name('user.index');
