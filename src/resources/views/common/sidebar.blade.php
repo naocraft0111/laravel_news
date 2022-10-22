@@ -20,8 +20,9 @@
                     <span class="mx-4 font-medium">総合トップ</span>
                 </a>
 
+                @auth
                 <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-blue-300 hover:text-gray-700"
-                    href="#">
+                    href="{{ route('user.index', ['id' => $user_id]) }}">
                     <svg class="w-5 h-5"
                         viewBox="0 0 24 24"
                         fill="none"
@@ -56,6 +57,7 @@
                     </svg>
                     <span class="mx-4 font-medium">マイニュース</span>
                 </a>
+                @endauth
 
                 <hr class="my-6 border-gray-200" />
 

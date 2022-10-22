@@ -2,6 +2,7 @@
 
 <div class="h-screen hidden lg:block shadow-lg relative w-50">
     <div class="bg-amber-100 h-full">
+        <div class="pt-3 pl-3">こんにちは、<br>{{ Auth::user()->name }}さん</div>
         <div class="flex items-center justify-start pt-6 ml-8">
             <p class="font-bold text-xl">
                 NewsApp
@@ -81,7 +82,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
                             <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
-                          </svg>
+                        </svg>
                     </span>
                     <span class="mx-2 text-md font-normal">
                         ゴミ箱
@@ -110,9 +111,12 @@
                             <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
                         </svg>
                     </span>
-                    <span class="mx-2 text-md font-normal">
-                        ログアウト
-                    </span>
+                    <form action="{{ route('logout')}}" method="POST">
+                        @csrf
+                        <button class="mx-2 text-md font-normal">
+                            ログアウト
+                        </button>
+                    </form>
                 </a>
             </div>
         </nav>
