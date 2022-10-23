@@ -92,7 +92,7 @@
                                         </td>
                                         <td class="px-5 py-5 mr-5 border-b border-gray-200 bg-white text-center text-sm">
                                             <div class="flex">
-                                                <form action="" method="POST">
+                                                <form action="{{ route('post.delete', ['post_id' => $post->id]) }}" method="POST" onsubmit="return is_delete_check()">
                                                 @csrf
                                                     <button type="submit" class="underline text-red-700 whitespace-no-wrap">
                                                         delete
@@ -125,6 +125,18 @@
             const cancel = 'キャンセルされました';
             // 記事を復元するをクリックした時に確認ダイアログを表示。OKで実行、キャンセルで実行しない。
             if(window.confirm(restore)) {
+                return true;
+            } else {
+                window.alert(cancel);
+                return false;
+            }
+        }
+
+        function is_delete_check() {
+            const deleteMessage = '記事を完全に削除しますか？';
+            const cancel = 'キャンセルされました';
+            // 記事を復元するをクリックした時に確認ダイアログを表示。OKで実行、キャンセルで実行しない。
+            if(window.confirm(deleteMessage)) {
                 return true;
             } else {
                 window.alert(cancel);

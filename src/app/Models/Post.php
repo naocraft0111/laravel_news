@@ -304,4 +304,17 @@ class Post extends Model
 
         return $result;
     }
+
+    /**
+     * 記事の削除
+     *
+     * @param array $post 投稿データ
+     * @return object $result App\Models\Post
+     */
+    public function deletePostData($post)
+    {
+        $result = $post->delete();
+
+        return $result;
+    }
 }
