@@ -11,7 +11,7 @@
         <div class="bg-amber-200 text-center text-amber-700 font-bold">ステータス：予約公開</div>
     @else
     @endif
-    <form action=""
+    <form action="{{ route('post.update', ['post_id' => $post->id]) }}"
         method="POST"
         class="p-5">
         @csrf
