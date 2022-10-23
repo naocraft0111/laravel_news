@@ -89,7 +89,10 @@ class Post extends Model
      */
     public function getAllPostsByUserId($user_id)
     {
-        $result = $this->where('user_id', $user_id)->with('category')->get();
+        $result = $this->where('user_id', $user_id)
+            ->with('category')
+            ->orderBy('updated_at', 'DESC')
+            ->get();
         return $result;
     }
 

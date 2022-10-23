@@ -39,6 +39,10 @@
                                     </th>
                                     <th scope="col"
                                         class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal">
+                                        最終更新日時
+                                    </th>
+                                    <th scope="col"
+                                        class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal">
                                         日付
                                     </th>
                                     <th scope="col"
@@ -129,7 +133,7 @@
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p class="text-center text-gray-900 whitespace-no-wrap">
-                                                {{ $post->created_at }}
+                                                {{ $post->updated_at }}
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 mr-5 border-b border-gray-200 bg-white text-sm">
