@@ -134,16 +134,18 @@
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 mr-5 border-b border-gray-200 bg-white text-center text-sm">
-                                            <a class="mr-3 text-blue-700 whitespace-no-wrap underline"
-                                                href="{{ route('post.edit', ['post_id' => $post->id]) }}">
-                                                Edit
-                                            </a>
-                                            <form action="{{ route('post.move.trash', ['post_id' => $post->id]) }}" method="POST" onsubmit="return is_move_trash()">
-                                            @csrf
-                                                <button type="submit" class="underline text-red-700 whitespace-no-wrap">
-                                                    Trash
-                                                </button>
-                                            </form>
+                                            <div class="flex justify-center">
+                                                <a class="mr-7 text-blue-700 whitespace-no-wrap underline"
+                                                    href="{{ route('post.edit', ['post_id' => $post->id]) }}">
+                                                    Edit
+                                                </a>
+                                                <form action="{{ route('post.move.trash', ['post_id' => $post->id]) }}" method="POST" onsubmit="return is_move_trash()">
+                                                @csrf
+                                                    <button type="submit" class="underline text-red-700 whitespace-no-wrap">
+                                                        Trash
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p class="text-center text-gray-900 whitespace-no-wrap">
