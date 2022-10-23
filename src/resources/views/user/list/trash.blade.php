@@ -90,7 +90,7 @@
                                                 {{ $post->updated_at }}
                                             </p>
                                         </td>
-                                        <td class="px-5 py-5 mr-5 border-b border-gray-200 bg-white text-sm">
+                                        <td class="px-5 py-5 mr-5 border-b border-gray-200 bg-white text-center text-sm">
                                             <div class="flex">
                                                 <form action="" method="POST">
                                                 @csrf

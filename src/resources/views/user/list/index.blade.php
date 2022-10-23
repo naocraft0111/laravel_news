@@ -138,10 +138,12 @@
                                                 href="{{ route('post.edit', ['post_id' => $post->id]) }}">
                                                 Edit
                                             </a>
-                                            <a class="ml-5 underline text-red-700 whitespace-no-wrap"
-                                                href="#">
-                                                delete
-                                            </a>
+                                            <form action="{{ route('post.move.trash', ['post_id' => $post->id]) }}" method="POST" onsubmit="return is_move_trash()">
+                                            @csrf
+                                                <button type="submit" class="underline text-red-700 whitespace-no-wrap">
+                                                    Trash
+                                                </button>
+                                            </form>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p class="text-center text-gray-900 whitespace-no-wrap">
@@ -162,4 +164,17 @@
             </div>
         </div>
     </div>
+    <script>
+        function is_move_trash() {
+            const moveTrashMessage = 'ゴミ箱に移動しますか？';
+            const cancelMessage = 'キャンセルされました';
+            // trashをクリックした時に確認ダイアログを表示。OKで実行、キャンセルで実行しない
+            if(window.confirm(moveTrashMessage)){
+                return true;
+            } else {
+                window.alert(cancelMessage);
+                return false;
+            }
+        }
+    </script>
 @endsection
