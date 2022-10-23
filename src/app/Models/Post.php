@@ -224,6 +224,7 @@ class Post extends Model
 
         return $result;
     }
+
     /**
      * 記事の更新処理
      * 公開予約=>publish_flg=2
@@ -242,6 +243,23 @@ class Post extends Model
         ]);
 
         $result->save();
+
+        return $result;
+    }
+
+    /**
+     * ゴミ箱一覧の記事を取得
+     *
+     * @param int $user_id ユーザーID
+     * @return object $result App\Models\Post
+     */
+    public function getTrashPostLists($user_id)
+    {
+        $result = $this->where([
+            ['user_id', $user_id],
+            ['delete_flg', 1],
+        ])
+        ->get();
 
         return $result;
     }
