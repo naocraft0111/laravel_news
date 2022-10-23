@@ -80,7 +80,7 @@
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
                                             <form action="{{ route('post.restore', ['post_id' => $post->id]) }}" method="POST" onSubmit="return is_restore_check()">
                                             @csrf
-                                                <button type="submit" class="mr-3 text-blue-700 whitespace-no-wrap underline">
+                                                <button type="submit" class=" text-blue-700 whitespace-no-wrap underline">
                                                     投稿を復元する
                                                 </button>
                                             </form>
@@ -91,7 +91,7 @@
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 mr-5 border-b border-gray-200 bg-white text-center text-sm">
-                                            <div class="flex">
+                                            <div class="flex justify-center">
                                                 <form action="{{ route('post.delete', ['post_id' => $post->id]) }}" method="POST" onsubmit="return is_delete_check()">
                                                 @csrf
                                                     <button type="submit" class="underline text-red-700 whitespace-no-wrap">
