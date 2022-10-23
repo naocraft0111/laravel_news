@@ -43,10 +43,6 @@
                                     </th>
                                     <th scope="col"
                                         class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal">
-                                        日付
-                                    </th>
-                                    <th scope="col"
-                                        class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
                                         操作
                                     </th>
                                     <th scope="col"
@@ -136,7 +132,7 @@
                                                 {{ $post->updated_at }}
                                             </p>
                                         </td>
-                                        <td class="px-5 py-5 mr-5 border-b border-gray-200 bg-white text-sm">
+                                        <td class="px-5 py-5 mr-5 border-b border-gray-200 bg-white text-center text-sm">
                                             <a class="mr-3 text-blue-700 whitespace-no-wrap underline"
                                                 href="{{ route('post.edit', ['post_id' => $post->id]) }}">
                                                 Edit
