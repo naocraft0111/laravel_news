@@ -357,4 +357,23 @@ class Post extends Model
 
         return $result;
     }
+
+    /**
+     * 予約公開の記事一覧を取得
+     *
+     * @param int $user_id ログイン中のユーザーID
+     * @return object $result App\Models\Post
+     */
+    public function getReservationRelease($user_id)
+    {
+        $result = $this->where([
+            ['user_id', $user_id],
+            ['publish_flg', 2],
+            ['delete_flg', 0],
+        ])
+        ->orderBy('updated_at', 'DESC')
+        ->get();
+
+        return $result;
+    }
 }

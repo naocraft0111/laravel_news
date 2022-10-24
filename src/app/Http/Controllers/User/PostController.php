@@ -190,4 +190,25 @@ class PostController extends Controller
             'releases',
         ));
     }
+
+    /**
+     * 予約公開記事一覧
+     *
+     * @return Response src/resources/views/user/list/reservationRelease.blade.phpを表示
+     */
+    public function reservationRelease()
+    {
+        // ログインしているユーザー情報を取得
+        $user = Auth::user();
+        // ログインユーザー情報からユーザーIDを取得
+        $user_id = $user->id;
+
+
+        // 予約公開の記事一覧を取得
+        $reservationPosts = $this->post->getReservationRelease($user_id);
+
+        return view('user.list.reservationRelease', compact(
+            'reservationPosts',
+        ));
+    }
 }
