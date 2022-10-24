@@ -5,20 +5,20 @@
 @section('content')
 <div class="p-5">
     <div class="font-bold text-2xl text-center">予約公開設定</div>
-    <form action="" method="" class="pt-12 text-center">
+    <form action="{{ route('reservation.post.store') }}" method="POST" class="pt-12 text-center">
     @csrf
         <div class="pb-5 text-2xl underline decoration-dashed decoration-amber-500">予約公開日を設定する</div>
         <label for="reservation_date">日付を選択：</label>
         <input type="date" name="reservation_date">
         <div class="pt-12 pb-5 text-2xl underline decoration-dashed decoration-amber-500">予約公開時間を設定する</div>
-        <label for="reservaiton_hour">時：</label>
+        <label for="reservation_hour">時：</label>
         <select name="reservation_hour">
             @for ($i=0; $i<=23; $i++)
                 <option value="{{ $i < 10 ? '0'.$i: $i }}">{{ $i < 10 ? '0'.$i: $i }}</option>
             @endfor
         </select>
-        <label for="reservaiton_minute">分：</label>
-        <select name="reservaiton_minute">
+        <label for="reservation_minute">分：</label>
+        <select name="reservation_minute">
             @foreach ($minuteList as $m)
                 <option value="{{ $m }}">{{ $m }}</option>
             @endforeach
