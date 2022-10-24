@@ -38,7 +38,8 @@ Route::controller(TopController::class)->group(function() {
 });
 
 // マイページ投稿関係
-Route::controller(PostController::class)->group(function() {
+Route::controller(PostController::class)->middleware(['auth'])
+->group(function() {
     // マイページトップ・投稿
     Route::get('/user/{id}/index', 'index')
         ->name('user.index');
@@ -77,7 +78,8 @@ Route::controller(PostController::class)->group(function() {
 });
 
 // ゴミ箱関係
-Route::controller(TrashController::class)->group(function() {
+Route::controller(TrashController::class)->middleware(['auth'])
+->group(function() {
     // 記事のゴミ箱
     Route::get('/post/trash', 'trashList')
         ->name('post.trash');
