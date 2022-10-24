@@ -30,3 +30,19 @@
         {{ session('updateReservationRelease')}}
     </div>
 @endif
+{{-- ゴミ箱：ゴミ箱に移動 --}}
+@if (session('moveTrash'))
+    <div class="bg-violet-200 border-t border-b border-violet-500 text-violet-700 text-center px-4 py-3 font-bold">
+        {{ session('moveTrash')}}
+    </div>
+{{-- ゴミ箱：記事を復元 --}}
+@elseif (session('restore'))
+    <div class="bg-sky-200 border-t border-b border-sky-500 text-sky-700 text-center px-4 py-3 font-bold">
+        {{ session('restore')}}
+    </div>
+{{-- ゴミ箱：記事を削除 --}}
+@elseif (session('delete'))
+    <div class="bg-red-200 border-t border-b border-red-500 text-red-700 text-center px-4 py-3 font-bold">
+        {{ session('delete')}}
+    </div>
+@endif
