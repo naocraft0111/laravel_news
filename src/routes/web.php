@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\User\PostController;
+use App\Http\Controllers\User\ReservationPostController;
 use App\Http\Controllers\User\TrashController;
 
 /*
@@ -97,3 +98,10 @@ Route::controller(TrashController::class)->middleware(['auth'])
         ->name('post.delete');
 });
 
+// 予約公開
+Route::controller(ReservationPostController::class)->middleware(['auth'])
+->group(function() {
+    // 公開予約設定画面
+    Route::get('/reservation/post/setting', 'reservationSetting')
+    ->name('reservation.post');
+});
