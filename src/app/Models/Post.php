@@ -174,7 +174,6 @@ class Post extends Model
             'delete_flg'       => 0,
             // created_atやupdated_atはmDB登録時に自動的に今日の日時で登録されるので、記載しない
         ]);
-        dd($request);
         return $result;
     }
 
