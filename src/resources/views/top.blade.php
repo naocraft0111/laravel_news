@@ -13,7 +13,15 @@
                 <div class="p-2 flex flex-col items-start">
                     <div class="flex">
                         <span
-                            class="bg-green-500 rounded-full text-white px-3 py-1 text-xs uppercase font-medium">{{ $post->category->category_name }}</span>
+                            class="bg-green-500 rounded-full text-white px-3 py-1 text-xs uppercase font-medium">
+                            <span class="relative">
+                                @if (isset($post->category_id))
+                                    {{ $post->category->category_name }}
+                                @else
+                                    カテゴリーなし
+                                @endif
+                            </span>
+                        </span>
                         <span class="ml-5 text-gray-600">投稿日時：</span>
                         <span class="text-gray-600">{{ $post->updated_at }}</span>
                         <span class="ml-5 text-gray-600">投稿者：</span>
