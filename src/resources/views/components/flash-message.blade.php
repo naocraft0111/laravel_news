@@ -14,3 +14,19 @@
         {{ session('reservation_release')}}
     </div>
 @endif
+{{-- 更新：下書き保存 --}}
+@if (session('updateSaveDraft'))
+    <div class="bg-blue-200 border-t border-b border-blue-500 text-blue-700 text-center px-4 py-3 font-bold">
+        {{ session('updateSaveDraft')}}
+    </div>
+{{-- 更新：公開 --}}
+@elseif (session('updateRelease'))
+    <div class="bg-green-200 border-t border-b border-green-500 text-green-700 text-center px-4 py-3 font-bold">
+        {{ session('updateRelease')}}
+    </div>
+{{-- 更新：公開予約 --}}
+@elseif (session('updateReservationRelease'))
+    <div class="bg-amber-200 border-t border-b border-amber-500 text-amber-700 text-center px-4 py-3 font-bold">
+        {{ session('updateReservationRelease')}}
+    </div>
+@endif
