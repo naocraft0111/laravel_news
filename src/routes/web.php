@@ -104,7 +104,12 @@ Route::controller(ReservationPostController::class)->middleware(['auth'])
     // 公開予約設定画面
     Route::get('/reservation/post/setting', 'reservationSetting')
     ->name('reservation.post');
+
     // 公開予約設定処理
     Route::post('/reservation/post/store', 'reservationStore')
     ->name('reservation.post.store');
+
+    // 公開予約設定編集画面
+    Route::get('/reservation/post/edit/{post_id}', 'reservationEdit')
+    ->name('reservation.post.edit');
 });
