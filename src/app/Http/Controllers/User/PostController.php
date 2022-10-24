@@ -150,4 +150,24 @@ class PostController extends Controller
 
         return to_route('user.index', ['id' => $user_id]);
     }
+
+    /**
+     * 下書き保存一覧
+     *
+     * @return Response src/resources/views/user/list/index.blade.phpを表示
+     */
+    public function saveDraft()
+    {
+        // ログインしているユーザー情報を取得
+        $user = Auth::user();
+        // ログインユーザー情報からユーザーIDを取得
+        $user_id = $user->id;
+
+        // 下書き保存一覧を取得
+        $saveDrafts = $this->post->getSaveDraftPosts($user_id);
+
+        return view('user.list.saveDraft', compact(
+            'saveDrafts',
+        ));
+    }
 }
