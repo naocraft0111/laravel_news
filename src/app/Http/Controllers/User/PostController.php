@@ -61,18 +61,22 @@ class PostController extends Controller
             // 下書き保存クリック時の処理
             case $request->has('save_draft'):
                 $this->post->insertPostToSaveDraft($user_id, $request);
+                $request->session()->flash('saveDraft', '記事を下書きで保存しました。');
                 break;
             // 公開クリック時の処理
             case $request->has('release'):
                 $this->post->insertPostToRelease($user_id, $request);
+                $request->session()->flash('release', '記事を公開しました。');
                 break;
             // 予約公開クリック時の処理
             case $request->has('reservation_release'):
                 $this->post->insertPostToReservationRelease($user_id, $request);
+                $request->session()->flash('reservation_release', '記事を予約公開しました。');
                 break;
             // 上記以外の処理
             default:
                 $this->post->insertPostToSaveDraft($user_id, $request);
+                $request->session()->flash('saveDraft', '記事を下書きで保存しました。');
                 break;
         }
 
