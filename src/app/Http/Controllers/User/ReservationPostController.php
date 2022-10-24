@@ -93,7 +93,7 @@ class ReservationPostController extends Controller
     }
 
     /**
-     * 予約公開設定
+     * 予約公開編集画面
      *
      * @param $request リクエストデータ
      * @param $post_id 投稿ID
@@ -116,9 +116,8 @@ class ReservationPostController extends Controller
         // 投稿IDをもとに特定の投稿データを取得
         $post = $this->post->fetchPostDateByPostId($post_id);
 
-        // ユーザーIDと投稿IDをもとに、予約公開する投稿データを取得
+        // ユーザーIDと投稿IDをもとに更新する予約公開記事のデータを1件取得
         $reservationPost = $this->reservationPost->getReservationPostByUserIdAndPostId($user_id, $post_id);
-        dd($reservationPost);
 
         // 予約公開設定テーブルにユーザーIDと投稿IDで条件を絞ったデータが存在しない場合、エラーになるので、日付や時間は空にして画面に渡す
         if (!isset($reservationPost)) {
@@ -162,5 +161,66 @@ class ReservationPostController extends Controller
             'hour',
             'minute'
         ));
+    }
+
+    /**
+     * 予約公開設定更新
+     *
+     * @param $request リクエストデータ
+     * @param $post_id 投稿ID
+     */
+    public function reservationUpdate(Request $request, $post_id)
+    {
+        // ログインしているユーザー情報を取得
+        $user = Auth::user();
+        // ログインユーザー情報からユーザーIDを取得
+        $user_id = $user->id;
+
+        // 投稿IDをもとに特定の投稿データを取得
+        $post = $this->post->fetchPostDateByPostId($post_id);
+        // 投稿データを更新
+        $this->post->updatePostToReservationRelease($request, $post);
+
+
+        // 画面で入力した予約設定_日付を取得
+        $date = $request->reservation_date;
+        // リクエストが2022-04-30とくるので、20220430に整形
+        $reservation_date = str_replace('-', '', $date);
+        // 画面で入力した予約時間_時を取得
+        $hour = $request->reservation_hour;
+        // 画面で入力した予約時間_分を取得
+        $minute = $request->reservation_minute;
+        // 予約時間_時と予約時間_分を合体し、末尾に00をつけてデータを整形。ex.173100
+        $reservation_time = $hour.$minute.'00';
+
+        // ユーザーIDと投稿IDをもとに更新する予約公開記事のデータを1件取得
+        $reservationPost = $this->reservationPost->getReservationPostByUserIdAndPostId($user_id, $post_id);
+
+        // 下書き→公開予約する際、そもそも予約公開データはないので$reservationPostはnullになり、画面がエラーになる。そのため制御。
+        if (!isset($reservationPost)) {
+            // 予約公開設定内容をreservation_postsにinsert
+            $this->reservationPost->insertReservationPostData(
+                $post,
+                $reservation_date,
+                $reservation_time
+            );
+
+            // セッションにフラッシュメッセージを格納
+            $request->session()->flash('updateReservationRelease', '記事を予約公開で更新しました。');
+            // 投稿一覧画面にリダイレクト
+            return to_route('user.index', ['id' => $user_id]);
+        }
+
+        // すでに投稿IDに紐づく予約公開データがあれば、その予約公開データを更新
+        $this->reservationPost->updateReservationPost(
+            $reservationPost,
+            $reservation_date,
+            $reservation_time
+        );
+
+        // セッションにフラッシュメッセージを格納
+        $request->session()->flash('updateReservationRelease', '記事を予約公開で更新しました。');
+        // 投稿一覧画面にリダイレクト
+        return to_route('user.index', ['id' => $user_id]);
     }
 }
