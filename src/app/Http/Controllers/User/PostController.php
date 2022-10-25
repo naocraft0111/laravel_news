@@ -164,20 +164,38 @@ class PostController extends Controller
         // 投稿IDをもとに特定の記事のデータを取得
         $post = $this->post->fetchPostDateByPostId($post_id);
 
+        // 投稿IDをもとに予約公開データを取得
+        $reservationPost = $this->reservationPost->getReservationPostByUserIdAndPostId($user_id, $post_id);
+
         switch (true) {
             // 下書き保存クリック時の処理
             case $request->has('save_draft'):
                 $this->post->updatePostToSaveDraft($request, $post);
                 $request->session()->flash('updateSaveDraft', '記事を下書きで更新しました。');
+                // 上記でもしデータがあれば、ステータスを下書きに戻すため予約公開データは不要なため削除する
+                if (isset($reservationPost)) {
+                    // 予約公開データの削除
+                    $this->reservationPost->deleteData($reservationPost);
+                }
                 break;
             // 公開クリック時の処理
             case $request->has('release'):
                 $this->post->updatePostToRelease($request, $post);
                 $request->session()->flash('updateRelease', '記事を更新し公開しました。');
+                // 上記でもしデータがあれば、ステータスを公開に戻すため予約公開データは不要なため削除する
+                if (isset($reservationPost)) {
+                    // 予約公開データの削除
+                    $this->reservationPost->deleteData($reservationPost);
+                }
                 break;
             // 上記以外の処理
             default:
                 $this->post->updatePostToSaveDraft($request, $post);
+                // 上記でもしデータがあれば、ステータスを下書きに戻すため予約公開データは不要なため削除する
+                if (isset($reservationPost)) {
+                    // 予約公開データの削除
+                    $this->reservationPost->deleteData($reservationPost);
+                }
                 $request->session()->flash('updateSaveDraft', '記事を下書きで更新しました。');
                 break;
         }
