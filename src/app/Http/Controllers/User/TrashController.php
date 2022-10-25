@@ -7,16 +7,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\ReservationPost;
 
 class TrashController extends Controller
 {
     private $post;
     private $category;
+    private $reservationPost;
 
     public function __construct()
     {
         $this->post = new Post();
         $this->category = new Category();
+        $this->reservationPost = new ReservationPost();
     }
 
     /**
@@ -54,6 +57,14 @@ class TrashController extends Controller
 
         // 投稿IDをもとに特定の投稿データを取得
         $post = $this->post->fetchPostDateByPostId($post_id);
+
+        // ユーザーIDと投稿IDをもとに更新する予約公開記事のデータを1件取得
+        $reservationPost = $this->reservationPost->getReservationPostByUserIdAndPostId($user_id, $post_id);
+        // 予約公開データがあるか
+        if (isset($reservationPost)) {
+            // 該当する予約公開データの削除
+            $this->reservationPost->deleteData($reservationPost);
+        }
 
         // 記事を論理削除(ゴミ箱に移動)
         $trashPost = $this->post->moveTrashPostData($post);
@@ -109,6 +120,14 @@ class TrashController extends Controller
         // 投稿IDをもとに特定の投稿データを取得
         $post = $this->post->fetchPostDateByPostId($post_id);
 
+        // ユーザーIDと投稿IDをもとに更新する予約公開記事のデータを1件取得
+        $reservationPost = $this->reservationPost->getReservationPostByUserIdAndPostId($user_id, $post_id);
+        // 予約公開データがあるか
+        if (isset($reservationPost)) {
+            // 該当する予約公開データの削除
+            $this->reservationPost->deleteData($reservationPost);
+        }
+        
         // 記事を物理削除(ゴミ箱からも削除)
         $deletePost = $this->post->deletePostData($post);
 
